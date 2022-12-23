@@ -1,0 +1,9 @@
+.addBtn {
+    width: 1.5rem;
+    height: 1.5rem;
+    background-color: #e8e8e8;
+    border-radius: 50%;
+    justify-content: center;
+    align-items: center;
+    font-size: 1.4rem;
+}

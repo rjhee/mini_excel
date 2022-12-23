@@ -1,0 +1,12 @@
+.row {
+    display: flex;
+    align-items: center;
+}
+
+.rowCover .row:last-child .tr{
+    border-bottom: 1px solid #888888;
+}
+
+.tr td:last-child{
+    border-right: 1px solid #888888;
+}
