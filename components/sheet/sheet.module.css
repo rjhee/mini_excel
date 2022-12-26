@@ -1,13 +1,17 @@
-
+.table {
+    border: none;
+}
 
 .rowCover {
     position: relative;
+}
+.titleRowCover{
+    display: flex;
 }
 
 .titleRow {
     display: flex;
     border-right: 1px solid #888888;
-    border-bottom: 1px solid #888888;
 }
 
 .row {

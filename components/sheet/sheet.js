@@ -11,47 +11,61 @@ const Sheet = () => {
     const [titleColumn, setTitleColumn] = useState([]);
     const [titleRow, setTitleRow] = useState([]);
     // const [tr, setTr] = useState([[<Cell c={AZ[0]} r={1} />,<Cell c={AZ[1]} r={1} />], [<Cell c={AZ[0]} r={2} />,<Cell c={AZ[1]} r={2} />]]);
-    const [rIndex, setRIndex] = useState(1);
+    const [rIndex, setRIndex] = useState(2);
     const [cIndex, setCIndex] = useState(2);
 
     function addRow() {
         let copy = [...tr];
+        let copyTitle = [...titleRow];
         let lastTr = copy[copy.length-1];
         setRIndex(rIndex+1);
-        copy.push(lastTr);
+        let arr = [];
+        for(let i = 0; i < lastTr.length; i++){
+            arr.push(<Cell key={rIndex} c={AZ[i]} r={rIndex+1} />)
+        }
+        copyTitle.push(<TitleCell key={rIndex} c={null} r={rIndex+1}/>);
+        copy.push(arr);
+        setTitleRow(copyTitle);
         setTr(copy);
     }
 
     function addColumn() {
         let copy = [...tr];
         let copyTitle = [...titleColumn];
+        let empty = [];
         setCIndex(cIndex+1);
-        copy[0].push(<Cell c={AZ[cIndex]} r={rIndex} />);
-        copyTitle.push(<TitleCell/>);
-        setTr(copy);
+        for(let i = 0; i < copy.length; i++){
+            let copy_ = [...copy[i]];
+            copy_.push(<Cell c={AZ[cIndex]} r={i+1} />);
+            empty.push(copy_);
+        }
+        setTr(empty);
+        console.log('sheet.js:41 ->',copy);
+        copyTitle.push(<TitleCell key={cIndex} c={AZ[cIndex]} r={null}/>);
         setTitleColumn(copyTitle)
     }
 
     function makeDefaultCell() {
-        let trArr = [];
         let titleColumnArr = [];
         let titleRowArr = [];
         let arr = [];
+        let num = 0;
         for (let i = 0; i < 2; i++) {
-            for(let j = 0; j < 1; j++){
-                arr.push(<Cell c={AZ[i]} r={i+1} />)
-            }
-            titleColumnArr.push(<TitleCell/>);
-            trArr.push(arr);
+            arr.push([
+                <Cell c={AZ[num]} r={i+1} />,
+                <Cell c={AZ[num+1]} r={i+1} />
+            ])
+            titleColumnArr.push(<TitleCell key={i} c={AZ[i]} r={null}/>);
+            titleRowArr.push(<TitleCell key={i} c={null} r={i+1}/>);
         }
-        titleRowArr.push(<TitleCell/>);
         setTitleColumn(titleColumnArr);
         setTitleRow(titleRowArr);
-        setTr(trArr);
+        setTr(arr);
     }
 
     useEffect(()=> {
             makeDefaultCell();
+        console.log('sheet.js:71 ->',tr);
         },[])
 
 
@@ -63,15 +77,20 @@ const Sheet = () => {
                     <TitleCell/>
                     {titleColumn}
                 </div>
-                {tr.map((items)=>
-
-                    <tr className={styles.tr}>
-                        {titleRow}
-                        {items.map((item)=>
-                            <td className={styles.td}>{item}</td>
-                            )}
-                    </tr>
-                )}
+                <div className={styles.titleRowCover}>
+                    <div className={styles.tr}>{titleRow}</div>
+                    <table className={styles.table}>
+                        <tbody className={styles.table}>
+                        {tr.map((items, i)=>
+                            <tr key={i} className={styles.tr}>
+                                {items.map((item, j)=>
+                                    <td key={j} className={styles.td}>{item}</td>
+                                )}
+                            </tr>
+                        )}
+                        </tbody>
+                    </table>
+                </div>
             </div>
             <div className={styles.addColBtn}>
                 <AddButton onClick={addColumn}/>

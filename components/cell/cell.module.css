@@ -1,13 +1,19 @@
 .cell,.titleCell {
-    border-top: 1px solid #888;
-    border-left: 1px solid #888;
     min-width: 3rem;
     min-height: 1.5rem;
     width: 5rem;
 }
 
+.cell {
+    border-top: 1px solid #888;
+    border-left: 1px solid #888;
+}
+
+
 .titleCell {
-    background-color: #888888;
+    background-color: #b4b4b4;
+    border-top: 1px solid #888;
+    border-left: 1px solid #888;
 }
 
 .titleCell input {
