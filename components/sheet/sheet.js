@@ -79,8 +79,7 @@ const Sheet = () => {
                 </div>
                 <div className={styles.titleRowCover}>
                     <div className={styles.tr}>{titleRow}</div>
-                    <table className={styles.table}>
-                        <tbody className={styles.table}>
+                    <tbody>
                         {tr.map((items, i)=>
                             <tr key={i} className={styles.tr}>
                                 {items.map((item, j)=>
@@ -88,8 +87,7 @@ const Sheet = () => {
                                 )}
                             </tr>
                         )}
-                        </tbody>
-                    </table>
+                    </tbody>
                 </div>
             </div>
             <div className={styles.addColBtn}>

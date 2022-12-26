@@ -1,6 +1,3 @@
-.table {
-    border: none;
-}
 
 .rowCover {
     position: relative;
@@ -11,15 +8,16 @@
 
 .titleRow {
     display: flex;
-    border-right: 1px solid #888888;
+    /*border-right: 1px solid #888888;*/
+}
+
+.table {
+    display: flex;
 }
 
 .row {
     border-bottom: 1px solid #888888;
-}
-
-.tr .td:last-child{
-    border-right: 1px solid #888888;
+    border-left: 1px solid #888888;
 }
 
 .addRowBtn {
